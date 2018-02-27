@@ -15,6 +15,7 @@
 		18A4E906204608A500A096B8 /* FactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E905204608A500A096B8 /* FactsTests.swift */; };
 		18A4E911204608CB00A096B8 /* Facts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E910204608CB00A096B8 /* Facts.swift */; };
 		18A4E9132046092200A096B8 /* FactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E9122046092200A096B8 /* FactData.swift */; };
+		18A4E91520460B9A00A096B8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E91420460B9A00A096B8 /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		18A4E907204608A500A096B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A4E910204608CB00A096B8 /* Facts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facts.swift; sourceTree = "<group>"; };
 		18A4E9122046092200A096B8 /* FactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactData.swift; sourceTree = "<group>"; };
+		18A4E91420460B9A00A096B8 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				18A4E8F9204608A400A096B8 /* LaunchScreen.storyboard */,
 				18A4E8FC204608A400A096B8 /* Info.plist */,
 				18A4E910204608CB00A096B8 /* Facts.swift */,
+				18A4E91420460B9A00A096B8 /* Networking.swift */,
 				18A4E9122046092200A096B8 /* FactData.swift */,
 			);
 			path = Facts;
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A4E91520460B9A00A096B8 /* Networking.swift in Sources */,
 				18A4E8F3204608A400A096B8 /* ViewController.swift in Sources */,
 				18A4E9132046092200A096B8 /* FactData.swift in Sources */,
 				18A4E911204608CB00A096B8 /* Facts.swift in Sources */,

@@ -10,9 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var url: URL {
+        let url = FactConstants.kFactsUrl
+        return URL(string: url)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let networkObj = Networking()
+        networkObj.load(url) { (fact) in
+            // Will do it tomorrow
+            
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
