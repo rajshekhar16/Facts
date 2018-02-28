@@ -15,6 +15,11 @@ public struct FactConstants
 
 class Networking: NSObject {
 
+    /// funtion to get response from REST Api and to fill data model Facts
+    ///
+    /// - Parameters:
+    ///   - url: url of an api
+    ///   - completion: return Facts object in completion handler
     func load(_ url: URL, withCompletion completion: @escaping (Facts?) -> Void) {
         
         let configuration = URLSessionConfiguration.ephemeral
@@ -40,6 +45,10 @@ class Networking: NSObject {
         task.resume()
     }
     
+    /// convert data from api into json using jsonserialization
+    ///
+    /// - Parameter data: data to be converted
+    /// - Returns: json
     func deserialize(data: Data) -> jsonObject? {
         
         let responseStrInISOLatin = String(data: data, encoding: String.Encoding.isoLatin1)

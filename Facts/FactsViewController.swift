@@ -21,16 +21,42 @@ class FactsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.showShimmers()
+        self.loadDataInToTable()
+ 
+    }
+    
+    // To show shimmer effect on tableView with the help of 3rd party library "Loader"
+    func showShimmers()
+    {
+        self.dataSource = FactsDataSource(factsData: [])
+        self.tableView.dataSource = self.dataSource
+        self.tableView.isScrollEnabled = false
+        self.tableView.reloadData()
+        Loader.addLoaderTo(self.tableView)
+    }
+
+    func hideShimmers()
+    {
+        self.tableView.isScrollEnabled = true
+        Loader.removeLoaderFrom(self.tableView)
+
+    }
+    
+    /// Responsible to load data into table
+    func loadDataInToTable()
+    {
         let networkObj = Networking()
         networkObj.load(url) { (fact) in
             
             if let title = fact?.title
             {
                 self.navigationController?.navigationBar.topItem?.title = title;
-
+                
             }
             if let factData = fact?.rows
             {
+                // remove entry from model if all objects are nil
                 self.factsDetails = factData.filter({ $0.imageURL != nil || ($0.desc != nil)  || $0.title != nil })
             }
             self.dataSource = FactsDataSource(factsData: self.factsDetails!)
@@ -40,12 +66,13 @@ class FactsViewController: UITableViewController {
                 self.tableView.estimatedRowHeight = 113
                 self.tableView.rowHeight = UITableViewAutomaticDimension
                 self.tableView.reloadData()
+                self.hideShimmers()
                 
                 
             }
             
         }
-
+        
     }
 
     override func didReceiveMemoryWarning() {
