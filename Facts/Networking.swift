@@ -18,7 +18,7 @@ class Networking: NSObject {
     func load(_ url: URL, withCompletion completion: @escaping (Facts?) -> Void) {
         
         let configuration = URLSessionConfiguration.ephemeral
-        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
+        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
         let task = session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
                 completion(nil)
@@ -32,7 +32,10 @@ class Networking: NSObject {
             }
             
             let factObj    = Facts(json: jsonObject)
-            completion(factObj)
+            DispatchQueue.main.async {
+                completion(factObj)
+
+            }
         })
         task.resume()
     }
