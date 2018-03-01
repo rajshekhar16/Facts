@@ -62,11 +62,11 @@ class FactsViewController: UITableViewController {
             self.dataSource = FactsDataSource(factsData: self.factsDetails!)
             DispatchQueue.main.async {
                 
+                self.hideShimmers()
                 self.tableView.dataSource = self.dataSource
                 self.tableView.estimatedRowHeight = 113
                 self.tableView.rowHeight = UITableViewAutomaticDimension
                 self.tableView.reloadData()
-                self.hideShimmers()
                 
                 
             }

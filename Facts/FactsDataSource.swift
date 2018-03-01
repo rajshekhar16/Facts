@@ -36,9 +36,17 @@ extension FactsDataSource: UITableViewDataSource {
         {
             return cell
         }
-        let quote = factsData[indexPath.row]
-        cell.title =  quote.title
-        cell.desc   =  quote.desc
+        let factDetails =   factsData[indexPath.row]
+        cell.title      =   factDetails.title
+        cell.desc       =   factDetails.desc
+        if factDetails.imageURL != nil
+        {
+            cell.factImageView.loadImageUsingCacheWithURL(factDetails.imageURL!)
+        }
+        else
+        {
+            cell.factImageView.image = nil
+        }
         return cell
         
     }

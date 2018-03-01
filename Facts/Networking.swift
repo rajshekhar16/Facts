@@ -15,7 +15,7 @@ public struct FactConstants
 
 class Networking: NSObject {
 
-    /// funtion to get response from REST Api and to fill data model Facts
+    /// funtion to get response from REST Api and to fill data model(Facts)
     ///
     /// - Parameters:
     ///   - url: url of an api
@@ -65,4 +65,35 @@ class Networking: NSObject {
         
     }
     
+}
+
+let imageCache = NSCache<NSString, UIImage>()
+extension UIImageView {
+    func loadImageUsingCacheWithURL(_ url: URL) {
+        self.image = nil
+        if let cachedImage = imageCache.object(forKey: NSString(string: url.absoluteString)) {
+            self.image = cachedImage
+            return
+        }
+        else {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                //print("RESPONSE FROM API: \(response)")
+                if error != nil {
+                    print("ERROR LOADING IMAGES FROM URL: \(error.debugDescription)")
+                    DispatchQueue.main.async {
+                        self.image = UIImage(named:"ImageName")
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let data = data {
+                        if let downloadedImage = UIImage(data: data) {
+                            imageCache.setObject(downloadedImage, forKey: NSString(string: url.absoluteString))
+                            self.image = downloadedImage
+                        }
+                    }
+                }
+            }).resume()
+        }
+    }
 }

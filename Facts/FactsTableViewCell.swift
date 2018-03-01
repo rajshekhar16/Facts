@@ -11,6 +11,7 @@ import UIKit
 class FactsTableViewCell: UITableViewCell {
 
   
+    @IBOutlet weak var factImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
