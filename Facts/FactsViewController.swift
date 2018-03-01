@@ -18,6 +18,8 @@ class FactsViewController: UITableViewController {
     var factsDetails :[FactData]?
     var dataSource: FactsDataSource?
     
+    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,17 +31,17 @@ class FactsViewController: UITableViewController {
     // To show shimmer effect on tableView with the help of 3rd party library "Loader"
     func showShimmers()
     {
-        self.dataSource = FactsDataSource(factsData: [])
-        self.tableView.dataSource = self.dataSource
-        self.tableView.isScrollEnabled = false
-        self.tableView.reloadData()
-        Loader.addLoaderTo(self.tableView)
+        activityIndicator.hidesWhenStopped = true;
+        activityIndicator.center = self.tableView.center;
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+
     }
 
     func hideShimmers()
     {
-        self.tableView.isScrollEnabled = true
-        Loader.removeLoaderFrom(self.tableView)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
 
     }
     

@@ -18,7 +18,6 @@
 		18A4E91520460B9A00A096B8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E91420460B9A00A096B8 /* Networking.swift */; };
 		18A4E91F20471AEA00A096B8 /* FactsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E91E20471AEA00A096B8 /* FactsDataSource.swift */; };
 		18A4E92120471B6C00A096B8 /* FactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E92020471B6C00A096B8 /* FactsTableViewCell.swift */; };
-		18A4E9232047377D00A096B8 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4E9222047377C00A096B8 /* Loader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +46,6 @@
 		18A4E91420460B9A00A096B8 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		18A4E91E20471AEA00A096B8 /* FactsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsDataSource.swift; sourceTree = "<group>"; };
 		18A4E92020471B6C00A096B8 /* FactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsTableViewCell.swift; sourceTree = "<group>"; };
-		18A4E9222047377C00A096B8 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +98,6 @@
 				18A4E9122046092200A096B8 /* FactData.swift */,
 				18A4E91E20471AEA00A096B8 /* FactsDataSource.swift */,
 				18A4E92020471B6C00A096B8 /* FactsTableViewCell.swift */,
-				18A4E9222047377C00A096B8 /* Loader.swift */,
 			);
 			path = Facts;
 			sourceTree = "<group>";
@@ -223,7 +220,6 @@
 				18A4E91F20471AEA00A096B8 /* FactsDataSource.swift in Sources */,
 				18A4E9132046092200A096B8 /* FactData.swift in Sources */,
 				18A4E911204608CB00A096B8 /* Facts.swift in Sources */,
-				18A4E9232047377D00A096B8 /* Loader.swift in Sources */,
 				18A4E8F1204608A400A096B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

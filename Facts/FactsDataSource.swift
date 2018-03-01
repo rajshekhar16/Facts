@@ -21,10 +21,7 @@ extension FactsDataSource: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.factsData.count == 0
-        {
-            return 15 //Only to show shimmers
-        }
+     
         return self.factsData.count
         
     }
@@ -32,10 +29,6 @@ extension FactsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"FactsTableCell") as! FactsTableViewCell
-        if self.factsData.count == 0 // for shimmers
-        {
-            return cell
-        }
         let factDetails =   factsData[indexPath.row]
         cell.title      =   factDetails.title
         cell.desc       =   factDetails.desc
