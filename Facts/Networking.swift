@@ -69,31 +69,42 @@ class Networking: NSObject {
 
 let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
-    func loadImageUsingCacheWithURL(_ url: URL) {
+  
+    /// Responsible to download images from url and image caching, will set image directly if coming from cache else will return downloaded image and indexpath in completion handler so that table view can reload particular cell.(This extension is specific for only tableView)
+    ///
+    /// - Parameters:
+    ///   - url: Url of an image
+    ///   - indexPath: indexPath of image
+    ///   - completion: object of UIImage and Indexpath
+    func loadImageUsingCacheForTableView(_ url: URL,indexPath :IndexPath,completion: @escaping (IndexPath?, UIImage) -> Void) {
         self.image = nil
-        if let cachedImage = imageCache.object(forKey: NSString(string: url.absoluteString)) {
+        let urlString = url.absoluteString
+        if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
             self.image = cachedImage
             return
         }
-        else {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                //print("RESPONSE FROM API: \(response)")
-                if error != nil {
-                    print("ERROR LOADING IMAGES FROM URL: \(error.debugDescription)")
-                    DispatchQueue.main.async {
-                        self.image = UIImage(named:"ImageName")
-                    }
-                    return
-                }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            //print("RESPONSE FROM API: \(response)")
+            if error != nil {
+                print("ERROR LOADING IMAGES FROM URL: \(error.debugDescription)")
                 DispatchQueue.main.async {
-                    if let data = data {
-                        if let downloadedImage = UIImage(data: data) {
-                            imageCache.setObject(downloadedImage, forKey: NSString(string: url.absoluteString))
-                            self.image = downloadedImage
-                        }
+                    let placeHolderImg = UIImage(named:"noImage.jpg")
+                    imageCache.setObject(placeHolderImg!, forKey: NSString(string: urlString))
+
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                if let data = data {
+                    if let downloadedImage = UIImage(data: data) {
+                        imageCache.setObject(downloadedImage, forKey: NSString(string: urlString))
+                        completion(indexPath, downloadedImage)
+                       // self.image = downloadedImage
                     }
                 }
-            }).resume()
-        }
+            }
+        }).resume()
+        
     }
 }

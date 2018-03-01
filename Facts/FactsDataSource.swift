@@ -34,7 +34,17 @@ extension FactsDataSource: UITableViewDataSource {
         cell.desc       =   factDetails.desc
         if factDetails.imageURL != nil
         {
-            cell.factImageView.loadImageUsingCacheWithURL(factDetails.imageURL!)
+            cell.factImageView.loadImageUsingCacheForTableView(factDetails.imageURL!, indexPath: indexPath, completion: { (indexPathToLoad, downloadedImg) in
+                if indexPathToLoad != nil
+                {
+                    cell.setNeedsLayout()
+                    cell.layoutIfNeeded()
+                    if let currentCell = tableView.cellForRow(at: indexPathToLoad!) as? FactsTableViewCell {
+                        currentCell.factImageView.image = downloadedImg
+                        tableView.reloadRows(at: [indexPathToLoad!], with: .bottom)
+                    }
+                }
+            })
         }
         else
         {

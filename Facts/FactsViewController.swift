@@ -17,19 +17,20 @@ class FactsViewController: UITableViewController {
     
     var factsDetails :[FactData]?
     var dataSource: FactsDataSource?
+    let networkObj = Networking()
     
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.showShimmers()
+        self.showActivityIndicator()
         self.loadDataInToTable()
  
     }
     
-    // To show shimmer effect on tableView with the help of 3rd party library "Loader"
-    func showShimmers()
+    // To show activity Indicator
+    func showActivityIndicator()
     {
         activityIndicator.hidesWhenStopped = true;
         activityIndicator.center = self.tableView.center;
@@ -38,17 +39,16 @@ class FactsViewController: UITableViewController {
 
     }
 
-    func hideShimmers()
+    func hideActivityIndicator()
     {
         self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
 
     }
     
     /// Responsible to load data into table
     func loadDataInToTable()
     {
-        let networkObj = Networking()
+        self.dataSource = nil
         networkObj.load(url) { (fact) in
             
             if let title = fact?.title
@@ -64,9 +64,8 @@ class FactsViewController: UITableViewController {
             self.dataSource = FactsDataSource(factsData: self.factsDetails!)
             DispatchQueue.main.async {
                 
-                self.hideShimmers()
+                self.hideActivityIndicator()
                 self.tableView.dataSource = self.dataSource
-                self.tableView.estimatedRowHeight = 113
                 self.tableView.rowHeight = UITableViewAutomaticDimension
                 self.tableView.reloadData()
                 
@@ -76,6 +75,21 @@ class FactsViewController: UITableViewController {
         }
         
     }
+    
+    // MARK: Delegate Methods of TableViewController
+    
+    var cellHeights: [IndexPath : CGFloat] = [:]
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeights[indexPath] = cell.frame.size.height
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let height = cellHeights[indexPath] else { return 50.0 }
+        return height
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
