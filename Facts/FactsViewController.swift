@@ -26,6 +26,7 @@ class FactsViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.showActivityIndicator()
         self.loadDataInToTable()
+        self.refreshControl?.addTarget(self, action:#selector(self.loadDataInToTable(refreshControl:)), for: UIControlEvents.valueChanged)
  
     }
     
@@ -45,10 +46,11 @@ class FactsViewController: UITableViewController {
 
     }
     
-    /// Responsible to load data into table
-    func loadDataInToTable()
+    /// Responsible to load data into table and also refresh when pull the tableView
+    @objc func loadDataInToTable(refreshControl :UIRefreshControl? = nil)
     {
-        self.dataSource = nil
+
+        networkObj.clearImageCache()
         networkObj.load(url) { (fact) in
             
             if let title = fact?.title
@@ -68,6 +70,9 @@ class FactsViewController: UITableViewController {
                 self.tableView.dataSource = self.dataSource
                 self.tableView.rowHeight = UITableViewAutomaticDimension
                 self.tableView.reloadData()
+                if refreshControl != nil{
+                    refreshControl?.endRefreshing()
+                }
                 
                 
             }

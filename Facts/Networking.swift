@@ -65,6 +65,11 @@ class Networking: NSObject {
         
     }
     
+    func clearImageCache()
+    {
+       imageCache.removeAllObjects()
+    }
+    
 }
 
 let imageCache = NSCache<NSString, UIImage>()
